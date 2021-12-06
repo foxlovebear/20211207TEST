@@ -44,7 +44,7 @@
                 </div>
                 <div class="field my-2">
                     <label for="other">other:</label>
-                    <textarea type="text" name="other" id="other" cols="30" rows="10" value="{{$editAccountInfo->other}}></textarea>
+                    <textarea type="text" name="other" id="other" cols="30" rows="10" value="{{$editAccountInfo->other}}"></textarea>
                 </div>
 
 

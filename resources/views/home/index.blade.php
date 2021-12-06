@@ -29,7 +29,7 @@
                         <h4>{{ $user->account }} {{ $user->name }}</h4>
                         <p>{{ $user->email }}</p>
                     </a>
-                    <button onclick="location.href='/edit_page'">編輯</button>
+                    <button onclick="location.href=`/edit_page/{{$user->id}}`">編輯</button>
 
                 </li>
                 @endforeach
