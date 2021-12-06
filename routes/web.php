@@ -13,5 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\EmployeeController@index');
-Route::resource('employees', 'App\Http\Controllers\EmployeeController');
+
+Route::resource('account_info', 'App\Http\Controllers\UserCRUDListController');
+Route::get('/', 'App\Http\Controllers\UserCRUDListController@index');
+
+// Route::middleware(['auth:sanctum','verified'])...等
