@@ -3,95 +3,108 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserCRUDList;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserCRUDListController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('user_list.index');
+        $userList = UserCRUDList::all();
+        return view("home.index", compact('userList'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view("UserCRUDList.create");
+        return view("home.create");
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $emp = new UserCRUDList();
-        $emp->firstName = $request->firstName;
-        $emp->lastName = $request->lastName;
-        $emp->save();
-        return redirect("/UserCRUDList");
+        $addAccountInfo = new UserCRUDList;
+        $addAccountInfo->account = $request->account;
+        $addAccountInfo->name = $request->name;
+        $addAccountInfo->gender = $request->gender;
+        $addAccountInfo->email = $request->email;
+        $addAccountInfo->birthday = $request->birthday;
+        $addAccountInfo->other = $request->other;
+        $addAccountInfo->save();
+        return redirect("/");
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\UserCRUDList  $UserCRUDList
-     * @return \Illuminate\Http\Response
-     */
-    public function show(UserCRUDList $UserCRUDList)
+    public function edit_page($id)
     {
-        //
+        $editAccountInfo = UserCRUDList::find($id);
+        return view("home.edit", ['editAccountInfo' => $editAccountInfo]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\UserCRUDList  $UserCRUDList
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $emp = UserCRUDList::find($id);
-        return view('UserCRUDList.edit', compact('emp'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UserCRUDList  $UserCRUDList
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        $emp = UserCRUDList::find($id);
-        $emp->firstName = $request->firstName;
-        $emp->lastName = $request->lastName;
-        $emp->save();
-        return redirect("/UserCRUDList");
+        $editAccountInfo = UserCRUDList::find($id);
+        $editAccountInfo->update($request->all());
+        return $editAccountInfo;
     }
 
+    //  * Store a newly created resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function store(Request $request)
+    // {
+    //     $emp = new UserCRUDList();
+    //     $emp->firstName = $request->firstName;
+    //     $emp->lastName = $request->lastName;
+    //     $emp->save();
+    //     return redirect("/UserCRUDList");
+    // }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $emp = UserCRUDList::find($id);
-        $emp->delete();
-        return redirect("/UserCRUDList");
-    }
+    // /**
+    //  * Display the specified resource.
+    //  *
+    //  * @param  \App\Models\UserCRUDList  $UserCRUDList
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function show(UserCRUDList $UserCRUDList)
+    // {
+    //     //
+    // }
+
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  *
+    //  * @param  \App\Models\UserCRUDList  $UserCRUDList
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function edit($id)
+    // {
+    //     $emp = UserCRUDList::find($id);
+    //     return view('UserCRUDList.edit', compact('emp'));
+    // }
+
+    // /**
+    //  * Update the specified resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @param  \App\Models\UserCRUDList  $UserCRUDList
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function update(Request $request, $id)
+    // {
+    //     $emp = UserCRUDList::find($id);
+    //     $emp->firstName = $request->firstName;
+    //     $emp->lastName = $request->lastName;
+    //     $emp->save();
+    //     return redirect("/UserCRUDList");
+    // }
+
+
+    // /**
+    //  * Remove the specified resource from storage.
+    //  *
+    //  * @param  \App\Models\Employee  $employee
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function destroy($id)
+    // {
+    //     $emp = UserCRUDList::find($id);
+    //     $emp->delete();
+    //     return redirect("/UserCRUDList");
+    // }
 }
